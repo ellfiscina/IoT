@@ -18,9 +18,11 @@ export class AuthProvider {
 			return this.http.post(Globals.apiUrl+"login.php", JSON.stringify({email: credentials.email, senha: credentials.password})).toPromise().then(
 				result => { 
 						return Observable.create(observer =>{
-							let access = result[0];
-							Globals.user = result[0] as User;
-							localStorage.setItem("user", JSON.stringify(Globals.user));
+							let access = result?true:false;
+							if(access){
+								Globals.user = result[0] as User;
+								localStorage.setItem("user", JSON.stringify(Globals.user));
+							}
 							observer.next(access);
 							observer.complete();
 						});	

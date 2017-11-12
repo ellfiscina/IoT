@@ -45,8 +45,11 @@
 #profile_pic{
 	width: 100%;	
 }
-h3{
+.perfil{
 	text-align: center;
+	position: relative;
+	top: 16px;
+	font-size: 20px;
 }
 .btnMenu:hover{
 	background-color: map-get($colors, secondary);

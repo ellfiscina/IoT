@@ -1,8 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, ViewController, AlertController, LoadingController, Loading, MenuController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController, Loading, MenuController } from 'ionic-angular';
 
 import { RegisterPage } from '../register/register';
-import { HomePage } from '../home/home';
 import { MyApp } from '../../app/app.component';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Globals } from '../../app/globals';

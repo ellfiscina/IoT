@@ -1,18 +1,45 @@
 <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
+  <ion-header id="oi">
+    <ion-list  no-lines>
+      <br>
+      <div *ngIf="user" id="profile_picDiv">
+        <img id="profile_pic" src="../assets/imgs/user.png">
+      </div>
+      <h3 *ngIf="user ; else elseBlock" class="white" menuClose  (click)="openPerfil()">
+        Perfil
+      </h3>
+    </ion-list>
   </ion-header>
 
-  <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+  <ion-content id="menu">
+    <ion-list  no-lines>
+      <button class="white btnMenu" menuClose ion-item  (click)="openHome()">
+        <ion-icon name="home" item-start></ion-icon>
+        Home
       </button>
+      <button class="white btnMenu" menuClose ion-item  (click)="openHome()">
+        <ion-icon name="settings" item-start></ion-icon>
+        Configurações
+      </button>
+
+      <ng-template  #elseBlock>
+        <button class="white btnMenu" menuClose ion-item  (click)="openLogin()">
+          <ion-icon name="log-in" item-start></ion-icon>
+          Login
+        </button>
+      </ng-template>
     </ion-list>
   </ion-content>
 
+  <ion-footer>
+          <div *ngIf="user">
+        
+        <button class="white btnMenu" menuClose ion-item (click)="logout()">
+          <ion-icon name="log-out" item-start></ion-icon>
+          Sair
+        </button>
+      </div>
+  </ion-footer>
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

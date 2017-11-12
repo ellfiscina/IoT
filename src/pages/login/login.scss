@@ -1,0 +1,22 @@
+page-login {
+
+}
+a{
+	text-decoration: none;
+	color: map-get($colors, light);
+	text-align: center;
+}
+form{
+
+	text-align: center;
+}
+#foot{
+	text-align: center;
+}
+#lg{
+	vertical-align: sub;
+}
+.btn{
+	position: relative;
+	top: 10px;
+}

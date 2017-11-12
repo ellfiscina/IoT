@@ -4,27 +4,25 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { LoginPage } from '../pages/login/login';
+import { PerfilPage } from '../pages/perfil/perfil';
 
+import {Globals} from './globals';
+
+import {AuthProvider} from '../providers/auth/auth';
 @Component({
-  templateUrl: 'app.html'
+  template: '<ion-nav [root]="rootPage"></ion-nav>',
+  templateUrl: 'app.html',
+  providers: [Globals],
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage = HomePage;
 
-  pages: Array<{title: string, component: any}>;
-
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private auth: AuthProvider) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
-
+    Globals.user = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):false;
   }
 
   initializeApp() {
@@ -36,9 +34,31 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
+  openLogin() {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    this.nav.setRoot(LoginPage);
+  }
+
+  openHome() {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.nav.setRoot(HomePage);
+  }
+
+  openPerfil() {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.nav.setRoot(PerfilPage);
+  }
+
+  logout(){
+    this.auth.logout().subscribe(succ => {
+      this.nav.setRoot(HomePage);
+    });
+  }
+
+  get user(){
+    return Globals.user;
   }
 }

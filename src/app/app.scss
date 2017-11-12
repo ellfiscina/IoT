@@ -1,4 +1,4 @@
-// http://ionicframework.com/docs/theming/
+/*// http://ionicframework.com/docs/theming/
 
 
 // App Global Sass
@@ -13,4 +13,41 @@
 //
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
+// automatically applied to the <body> element in the app.*/
+
+
+.toolbar-background {
+  background-color: map-get($colors, primary);
+}
+.toolbar-title, .bar-button, .white{
+	color: white;
+}
+
+#menu{
+	background-image: url(../assets/imgs/menu_bg.png);
+	background-repeat: no-repeat;
+}
+
+.white{
+	color: white;
+	background: none;
+}
+
+#profile_picDiv{
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+	border-radius: 50%;
+	border: 5px solid white;
+	margin: auto;
+}
+
+#profile_pic{
+	width: 100%;	
+}
+h3{
+	text-align: center;
+}
+.btnMenu:hover{
+	background-color: map-get($colors, secondary);
+}

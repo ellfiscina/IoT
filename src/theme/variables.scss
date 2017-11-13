@@ -72,6 +72,8 @@ $colors: (
 
 @import "ionic.theme.default";
 
+$text-input-md-highlight-color:             color($colors, secondary);
+$text-input-md-hightlight-color-invalid:    color($colors, danger);
 
 // Ionicons
 // --------------------------------------------------

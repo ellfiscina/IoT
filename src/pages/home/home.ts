@@ -6,16 +6,26 @@ import { Globals } from '../../app/globals';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
+  providers: [Globals],
 })
 export class HomePage implements OnInit{
 	private numero: number;
   createSuccess = false;
 
-  constructor(public navCtrl: NavController, private temp: TemperatureProvider, private alertCtrl: AlertController) {}
+  constructor(public navCtrl: NavController, private temp: TemperatureProvider, private alertCtrl: AlertController) {
+    Globals.user = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):false;
+  }
 
 	ngOnInit() {
-  		this.limpar()
+  		//this.read();
+      this.limpar();
   	}
+
+    /*isso aqui é pra ler o que tá no arquivo e substituir o numero que vai sofrer modificação*/
+    read(){
+      this.numero = parseInt(JSON.stringify(this.temp.ler())); //isso foi eu tentando trasformar em number
+      console.log(this.numero);
+    }
 
   	limpar(){
   		this.numero = 15;
@@ -55,6 +65,10 @@ export class HomePage implements OnInit{
       ]
     });
     alert.present();
+  }
 
+  user(){
+    var disable = Globals.user? false: true;
+    return disable;
   }
 }

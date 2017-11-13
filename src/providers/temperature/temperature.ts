@@ -48,11 +48,15 @@ export class TemperatureProvider {
   }
 
   public salvar(value):Promise<any>{
-    return this.http.get(Globals.apiUrl+"arduino.php?campo="+value).toPromise().then(data => {
+    return this.http.get(Globals.apiUrl+"arduinoWrite.php?campo="+value).toPromise().then(data => {
           console.log(value);
         },
         error => {
           console.log(error);
         });
+  }
+
+  public ler(){
+    return this.http.get(Globals.apiUrl+"arduinoRead.php").toPromise().then(resposta=>{return resposta});
   }
 }

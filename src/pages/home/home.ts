@@ -35,7 +35,7 @@ export class HomePage implements OnInit{
     //send data to provider
     if(this.temp.salvar(this.numero)){
       this.createSuccess = true;
-      this.showPopup("Temperatura ajustada", "");
+      this.showPopup("Temperatura ajustada", this.numero+"ºC");
     }
   }
 

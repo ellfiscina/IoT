@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TemperatureProvider } from '../../providers/temperature/temperature';
-import { File } from '@ionic-native/file';
 import { Globals } from '../../app/globals';
 
 @Component({
@@ -11,7 +10,7 @@ import { Globals } from '../../app/globals';
 export class HomePage implements OnInit{
 	private numero: number;
 
-  constructor(public navCtrl: NavController, private temp: TemperatureProvider, private file: File) {}
+  constructor(public navCtrl: NavController, private temp: TemperatureProvider) {}
 
 	ngOnInit() {
   		this.limpar()

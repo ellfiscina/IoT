@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, PopoverController, AlertController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, MenuController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Globals } from '../../app/globals';
 /**
@@ -19,7 +19,7 @@ export class RegisterPage {
   createSuccess = false;
 	registerCredentials = {email: '', password: ''};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, public popoverCtrl: PopoverController, private auth: AuthProvider, private alertCtrl: AlertController, public menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, private auth: AuthProvider, private alertCtrl: AlertController, public menu: MenuController) {
 
   }
 

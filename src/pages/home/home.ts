@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController} from 'ionic-angular';
 import { TemperatureProvider } from '../../providers/temperature/temperature';
 import { Globals } from '../../app/globals';
 
@@ -9,8 +9,9 @@ import { Globals } from '../../app/globals';
 })
 export class HomePage implements OnInit{
 	private numero: number;
+  createSuccess = false;
 
-  constructor(public navCtrl: NavController, private temp: TemperatureProvider) {}
+  constructor(public navCtrl: NavController, private temp: TemperatureProvider, private alertCtrl: AlertController) {}
 
 	ngOnInit() {
   		this.limpar()
@@ -32,5 +33,28 @@ export class HomePage implements OnInit{
     console.log(this.numero.toString());
 
     //send data to provider
+    if(this.temp.salvar(this.numero)){
+      this.createSuccess = true;
+      this.showPopup("Temperatura ajustada", "");
+    }
+  }
+
+  showPopup(title, text){
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+      {
+        text: 'OK',
+        handler: data => {
+          if(this.createSuccess){
+            this.navCtrl.popToRoot();
+          }
+        }
+      }
+      ]
+    });
+    alert.present();
+
   }
 }

@@ -14,8 +14,10 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class TemperatureProvider {
 	static readonly SOMA: string = '+';
-  	static readonly SUBTRACAO: string = '-';
+  static readonly SUBTRACAO: string = '-';
 
+  createSuccess = false;
+  
   constructor(private http:HttpClient) {}
 
   calcular(num: number, operacao: string): number{
@@ -46,18 +48,11 @@ export class TemperatureProvider {
   }
 
   public salvar(value):Promise<any>{
-    if(value === null){
-      return Promise.resolve(Observable.throw("Insert credentials"));
-    }
-    else{
-      return this.http.post(Globals.apiUrl+"arduino.php", JSON.stringify(value)).toPromise().then(
-        result => { 
-          return Observable.create(observer =>{
-            observer.next(true);
-            observer.complete();
-          });  
-        }
-        );
-    }
+    return this.http.get(Globals.apiUrl+"arduino.php?campo="+value).toPromise().then(data => {
+          console.log(value);
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

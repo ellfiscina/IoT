@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TemperatureProvider } from '../../providers/temperature/temperature';
+import { File } from '@ionic-native/file';
+import { Globals } from '../../app/globals';
 
 @Component({
   selector: 'page-home',
@@ -9,7 +11,7 @@ import { TemperatureProvider } from '../../providers/temperature/temperature';
 export class HomePage implements OnInit{
 	private numero: number;
 
-  constructor(public navCtrl: NavController, private temp: TemperatureProvider) {}
+  constructor(public navCtrl: NavController, private temp: TemperatureProvider, private file: File) {}
 
 	ngOnInit() {
   		this.limpar()
@@ -25,5 +27,11 @@ export class HomePage implements OnInit{
 
   get display(): number {
   	return this.numero;
+  }
+
+  saveData(){
+    console.log(this.numero.toString());
+
+    //send data to provider
   }
 }

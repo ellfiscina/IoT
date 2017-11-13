@@ -1,6 +1,6 @@
- import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient} from '@angular/common/http';
 import { Globals } from '../../app/globals';
 import { User } from '../../app/user';
 import 'rxjs/add/operator/toPromise'

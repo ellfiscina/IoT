@@ -17,14 +17,19 @@ export class HomePage implements OnInit{
   }
 
 	ngOnInit() {
-  		//this.read();
-      this.limpar();
+  		this.read();
+      console.log(Globals.default);
+      
   	}
 
     /*isso aqui é pra ler o que tá no arquivo e substituir o numero que vai sofrer modificação*/
     read(){
-      this.numero = parseInt(JSON.stringify(this.temp.ler())); //isso foi eu tentando trasformar em number
-      console.log(this.numero);
+      if(Globals.user){
+        this.numero = Globals.user.temperature;
+      }
+      else{
+        this.numero = Globals.default;
+      }
     }
 
   	limpar(){

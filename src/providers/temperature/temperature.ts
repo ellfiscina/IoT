@@ -24,27 +24,22 @@ export class TemperatureProvider {
   	let resultado: number;
   	switch (operacao) {
   		case TemperatureProvider.SOMA:
-  			if(num == 30){
-  				resultado = num;
-  			}
-  			else{
-  				resultado = num + 1;
+  			if(num < 30){
+  				++num;
   			}
   			break;
   		case TemperatureProvider.SUBTRACAO:
-  			if(num == 15){
-  				resultado = 15;
-  			}
-  			else{
-  				resultado = num - 1;
+  			if(num > 15){
+  				--num;
   			}
   			break;
   		
   		default:
-  			resultado = 15;
+  			num = 15;
   			break;
   	}
-  	return resultado;
+    
+  	return num;
   }
 
   public salvar(value):Promise<any>{

@@ -43,14 +43,12 @@ export class TemperatureProvider {
   }
 
   public salvar(value, email):Promise<any>{
-    
     return this.http.get(Globals.apiUrl+"setTemperature.php?temperature="+value+"&email="+email).toPromise().then(
-        result => { 
-            return Observable.create(observer =>{
-              observer.next(true);
-              observer.complete();
-            });  
-            }
-        );
+        data => {
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

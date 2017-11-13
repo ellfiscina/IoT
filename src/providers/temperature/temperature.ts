@@ -35,23 +35,22 @@ export class TemperatureProvider {
   			break;
   		
   		default:
-  			num = 15;
+  			num = Globals.default;
   			break;
   	}
     
   	return num;
   }
 
-  public salvar(value):Promise<any>{
-    return this.http.get(Globals.apiUrl+"arduinoWrite.php?campo="+value).toPromise().then(data => {
-          console.log(value);
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
-  public ler(){
-    return this.http.get(Globals.apiUrl+"arduinoRead.php").toPromise().then(resposta=>{return resposta});
+  public salvar(value, email):Promise<any>{
+    
+    return this.http.get(Globals.apiUrl+"setTemperature.php?temperature="+value+"&email="+email).toPromise().then(
+        result => { 
+            return Observable.create(observer =>{
+              observer.next(true);
+              observer.complete();
+            });  
+            }
+        );
   }
 }

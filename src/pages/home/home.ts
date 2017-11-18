@@ -11,7 +11,7 @@ import { Globals } from '../../app/globals';
 export class HomePage implements OnInit{
 	private numero: number;
   createSuccess = false;
-
+  status = "off";
   constructor(public navCtrl: NavController, private temp: TemperatureProvider, private alertCtrl: AlertController) {
     Globals.user = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):false;
   }

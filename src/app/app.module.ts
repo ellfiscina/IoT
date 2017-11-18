@@ -8,9 +8,13 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { AddressMapPage } from '../pages/address-map/address-map';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {GoogleMaps} from '@ionic-native/google-maps';
+import {Geolocation} from '@ionic-native/geolocation';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 import { TemperatureProvider } from '../providers/temperature/temperature';
 import { AuthProvider } from '../providers/auth/auth';
@@ -21,7 +25,8 @@ import { AuthProvider } from '../providers/auth/auth';
     HomePage,
     LoginPage,
     RegisterPage,
-    PerfilPage
+    PerfilPage,
+    AddressMapPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,8 @@ import { AuthProvider } from '../providers/auth/auth';
     HomePage,
     LoginPage,
     RegisterPage,
-    PerfilPage
+    PerfilPage,
+    AddressMapPage
   ],
   providers: [
     StatusBar,
@@ -42,6 +48,9 @@ import { AuthProvider } from '../providers/auth/auth';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TemperatureProvider,
     AuthProvider,
+    Geolocation,
+    GoogleMaps,
+    NativeGeocoder
   ]
 })
 export class AppModule {}

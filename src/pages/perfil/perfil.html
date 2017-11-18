@@ -32,8 +32,9 @@
         <button ion-button clear item-right><ion-icon name="create"  (click)="edit('email')" ></ion-icon></button> 
       </ion-item>
       <ion-item>
-      	<ion-label>Endereço:</ion-label>
-        
+      	<ion-label >Endereço:</ion-label>
+        <button ion-button item-right (click)="showMap()"></button>
+        <ion-input type="text" name="address" ></ion-input>
       </ion-item>
      
       <ion-item *ngIf=!inactiveSenha>

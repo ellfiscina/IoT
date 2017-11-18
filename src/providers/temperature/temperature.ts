@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { Globals } from '../../app/globals';
 import 'rxjs/add/operator/toPromise'
@@ -21,7 +20,6 @@ export class TemperatureProvider {
   constructor(private http:HttpClient) {}
 
   calcular(num: number, operacao: string): number{
-  	let resultado: number;
   	switch (operacao) {
   		case TemperatureProvider.SOMA:
   			if(num < 30){

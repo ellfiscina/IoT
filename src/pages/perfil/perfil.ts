@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ModalController, Modal } from 'ionic-angular';
 import { Globals } from '../../app/globals';
+import { AuthProvider } from '../../providers/auth/auth';
+import { AddressMapPage } from '../address-map/address-map';
 /**
  * Generated class for the PerfilPage page.
  *
@@ -18,7 +20,10 @@ export class PerfilPage {
 	public inactiveNome : boolean = true;
 	public inactiveEmail : boolean = true;
 	public inactiveSenha : boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, globals: Globals) {
+  createSuccess = false;
+  data = Globals.user;
+  show = true;
+  constructor(public navCtrl: NavController, public navParams: NavParams, globals: Globals, private auth: AuthProvider, private alertCtrl: AlertController, private modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -41,5 +46,41 @@ export class PerfilPage {
   	else if(tipo == 'senha'){
   		this.inactiveSenha = false;
   	}
+  }
+
+  updateUser(data){
+       data.id = Globals.user.id;
+       this.auth.updateUser(data).then(result => {console.log("ok")});
+   }
+
+  showPopup(title, text){
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+      {
+        text: 'OK',
+        handler: data => {
+          if(this.createSuccess){
+            this.navCtrl.popToRoot();
+          }
+        }
+      }
+      ]
+    });
+    alert.present();
+
+  }
+
+  mapModal: Modal;
+  showMap(){
+    this.mapModal = this.modalCtrl.create(AddressMapPage);
+
+    this.show = false;
+    this.mapModal.present();
+    this.mapModal.onDidDismiss((addr) => {
+      this.show = true;
+      this.data.endereco = addr.thoroughfare+', '+addr.subThoroughfare+'\n'+addr.subLocality+', '+addr.locality+', '+addr.administrativeArea+'\n'+addr.countryName+'\n'+addr.postalCode;
+    })
   }
 }

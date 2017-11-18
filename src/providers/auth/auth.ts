@@ -66,6 +66,17 @@ export class AuthProvider {
 			observer.complete();
 		});
 	}
+
+	public updateUser(data):Promise<any>{
+		//console.log(data);
+		return this.http.post(Globals.apiUrl+"updateUser.php", JSON.stringify(data)).toPromise().then(
+				result => {
+					Globals.user = result[0] as User;
+					localStorage.setItem("user", JSON.stringify(Globals.user));
+					return true;
+				}
+			);
+	}
   constructor(private http:HttpClient) { }
 
 }

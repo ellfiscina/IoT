@@ -3,4 +3,5 @@ export class User{
 	email: string;
 	foto: string;
 	temperature: number;
+	status: number;
 }

@@ -52,6 +52,15 @@ export class HomePage implements OnInit{
       this.createSuccess = true;
       this.showPopup("Temperatura ajustada", this.numero+"ºC");
     }
+   // this.temp.arduino(Globals.user.email);
+  }
+
+  desligar(){
+    if(this.temp.desligar(Globals.user.email)){
+      this.createSuccess = true;
+      this.showPopup("Temperatura ajustada", this.numero+"ºC");
+    }
+   // this.temp.arduino(Globals.user.email);
   }
 
   showPopup(title, text){
@@ -72,7 +81,7 @@ export class HomePage implements OnInit{
     alert.present();
   }
 
-  user(){
+  get user(){
     var disable = Globals.user? false: true;
     return disable;
   }

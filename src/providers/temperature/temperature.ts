@@ -43,7 +43,32 @@ export class TemperatureProvider {
   }
 
   public salvar(value, email):Promise<any>{
-    return this.http.get(Globals.apiUrl+"setTemperature.php?temperature="+value+"&email="+email).toPromise().then(
+    return this.http.get(Globals.apiUrl+"setTemperature.php?temperature="+value+"&email="+email+"&status=1").toPromise().then(
+        data => {
+          Globals.user.temperature = value;
+          Globals.user.status = 1;
+          localStorage.setItem("user", JSON.stringify(Globals.user));
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  public desligar(email):Promise<any>{
+    return this.http.get(Globals.apiUrl+"setTemperature.php?temperature="+Globals.user.temperature+"&email="+email+"&status=0").toPromise().then(
+        data => {
+          Globals.user.status = 0;
+          localStorage.setItem("user", JSON.stringify(Globals.user));
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  public arduino(value):Promise<any>{
+    return this.http.get(Globals.apiUrl+"arduinoRead.php?email="+value).toPromise().then(
         data => {
           console.log(data);
         },

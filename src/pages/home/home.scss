@@ -2,7 +2,10 @@ page-home {
 
 }
 #display{
-	font-size: 20px;	
+	font-size: 35px;	
+	width: 57px;
+    position: relative;
+    left: 10px;
 }
 .btnHome{
 	height: 50px;
@@ -11,12 +14,9 @@ page-home {
     border-radius: 100%;
 }
 
-#mais{
-	float: left;
-}
-
-#menos{
-	float: right;
+#mais, #menos{
+	position: relative;
+	top: 7px;
 }
 
 #display:focus{
@@ -24,7 +24,7 @@ page-home {
 }
 
 .btnOK{
-	float: right;
-	margin: 25px;
-	width: 20%;
+	width: 96px;
+	position: relative;
+	top: 20px;
 }

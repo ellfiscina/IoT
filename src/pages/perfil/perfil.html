@@ -15,5 +15,39 @@
 
 
 <ion-content padding>
-
+	<div id="profile_picDiv">
+    	<img  id="profile_pic" src="../../assets/imgs/logo.png">
+    	<ion-icon name="create"></ion-icon>
+	</div>
+	<form #registerForm="ngForm">
+    <ion-list>
+      <ion-item>
+      	<ion-label>Nome:</ion-label>
+        <ion-input type="text" name="nome" value={{user.nome}} [disabled]="inactiveNome"></ion-input>
+       	<button ion-button clear item-right><ion-icon name="create"  (click)="edit('nome')" ></ion-icon></button> 
+      </ion-item>
+      <ion-item>
+      	<ion-label>Email:</ion-label>
+        <ion-input type="text" name="email" value={{user.email}} [disabled]="inactiveEmail"></ion-input>
+        <button ion-button clear item-right><ion-icon name="create"  (click)="edit('email')" ></ion-icon></button> 
+      </ion-item>
+      <ion-item>
+      	<ion-label>Endereço:</ion-label>
+        
+      </ion-item>
+     
+      <ion-item *ngIf=!inactiveSenha>
+      	<ion-label>Nova senha:</ion-label>
+        <ion-input type="password" name="password"></ion-input>
+      </ion-item>
+      <ion-item *ngIf=!inactiveSenha>
+      	<ion-label>Confirmar senha:</ion-label>
+        <ion-input type="password" name="password"></ion-input>
+      </ion-item>
+       <br>
+      	<span *ngIf="inactiveSenha" (click)="edit('senha')" id="senha">Mudar a senha</span>
+      <br>
+      <button ion-button round full class="btn" type="submit">Confirmar</button>
+    </ion-list>
+  </form>
 </ion-content>

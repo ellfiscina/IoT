@@ -3,7 +3,7 @@
     <ion-list  no-lines>
       <br>
       <div *ngIf="user" id="profile_picDiv">
-        <img id="profile_pic" src="../assets/imgs/user.png">
+        <img  id="profile_pic" src="../assets/imgs/user.png">
       </div>
       <button *ngIf="user ; else elseBlock" class="white btnMenu perfil" menuClose ion-item  (click)="openPerfil()">
         {{user.nome}}

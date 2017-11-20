@@ -68,7 +68,7 @@ export class AuthProvider {
 	}
 
 	public updateUser(data):Promise<any>{
-		//console.log(data);
+		console.log(data);
 		return this.http.post(Globals.apiUrl+"updateUser.php", JSON.stringify(data)).toPromise().then(
 				result => {
 					Globals.user = result[0] as User;

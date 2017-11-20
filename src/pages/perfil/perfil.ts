@@ -48,9 +48,14 @@ export class PerfilPage {
   	}
   }
 
-  updateUser(data){
-       data.id = Globals.user.id;
-       this.auth.updateUser(data).then(result => {console.log("ok")});
+  updateUser(){
+       console.log(this.data);
+       this.auth.updateUser(this.data).then(result => {
+         console.log("ok");
+         this.inactiveEmail = true;
+         this.inactiveNome = true;
+         this.inactiveSenha = true;
+       });
    }
 
   showPopup(title, text){

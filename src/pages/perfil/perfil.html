@@ -14,26 +14,26 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding *ngIf="show">
 	<div id="profile_picDiv">
     	<img  id="profile_pic" src="../../assets/imgs/logo.png">
     	<ion-icon name="create"></ion-icon>
 	</div>
-	<form #registerForm="ngForm">
+	<form (ngSubmit)="updateUser()" #registerForm="ngForm">
     <ion-list>
       <ion-item>
       	<ion-label>Nome:</ion-label>
         <ion-input type="text" name="nome" [(ngModel)]="data.nome" [disabled]="inactiveNome" ></ion-input>
-       	<button ion-button clear item-right><ion-icon name="create"  (click)="edit('nome')" ></ion-icon></button> 
+       	<span ion-button clear item-right><ion-icon name="create"  (click)="edit('nome')" ></ion-icon></span> 
       </ion-item>
       <ion-item>
       	<ion-label>Email:</ion-label>
         <ion-input type="text" name="email" [(ngModel)]="data.email" [disabled]="inactiveEmail"></ion-input>
-        <button ion-button clear item-right><ion-icon name="create"  (click)="edit('email')" ></ion-icon></button> 
+        <span ion-button clear item-right><ion-icon name="create"  (click)="edit('email')" ></ion-icon></span> 
       </ion-item>
       <ion-item>
       	<ion-label>Endereço:</ion-label>
-        <button ion-button item-right clear (click)="showMap()"> <ion-icon name="map"></ion-icon></button>
+        <span ion-button item-right clear (click)="showMap()"> <ion-icon name="map"></ion-icon></span>
         <ion-textarea name="endereco" [(ngModel)]="data.endereco" rows="5"></ion-textarea>
       </ion-item>
      
@@ -47,8 +47,8 @@
       </ion-item>
       	<ion-label *ngIf="inactiveSenha" (click)="edit('senha')" id="senha">Mudar a senha</ion-label>
     </ion-list>
+  <button ion-button color="secondary" class="btn" type="submit">Confirmar</button>
   </form>
 </ion-content>
 <ion-footer>
-  <button ion-button color="secondary" class="btn" type="submit">Confirmar</button>
 </ion-footer>

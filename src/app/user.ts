@@ -6,4 +6,6 @@ export class User{
 	temperature: number;
 	status: number;
 	endereco: string;
+	lat: number;
+	lng: number;
 }

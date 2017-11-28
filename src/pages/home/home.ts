@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController} from 'ionic-angular';
 import { TemperatureProvider } from '../../providers/temperature/temperature';
 import { Globals } from '../../app/globals';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 @Component({
   selector: 'page-home',
@@ -12,14 +14,15 @@ export class HomePage implements OnInit{
 	private numero: number;
   createSuccess = false;
   status = "off";
-  constructor(public navCtrl: NavController, private temp: TemperatureProvider, private alertCtrl: AlertController) {
+
+  constructor(public navCtrl: NavController, private temp: TemperatureProvider, private alertCtrl: AlertController, public geolocation: Geolocation) {
     Globals.user = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):false;
   }
 
 	ngOnInit() {
   		this.read();
-      console.log(Globals.default);
-      
+      this.getPosition();
+      console.log(Globals.default); 
   	}
 
     /*isso aqui é pra ler o que tá no arquivo e substituir o numero que vai sofrer modificação*/
@@ -85,4 +88,15 @@ export class HomePage implements OnInit{
     var disable = Globals.user? false: true;
     return disable;
   }
+
+  getPosition(){
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe((data) => {
+      console.log("Latitude: " + data.coords.latitude, "Longitude: " + data.coords.longitude);
+    },
+    (error) => {
+      console.log("Error: " + error.code, "Message: " + error.message);
+    })
+  }
+
 }

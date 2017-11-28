@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { AddressMapPage } from '../pages/address-map/address-map';
+import { ConfigPage } from '../pages/config/config';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,6 +19,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 import { TemperatureProvider } from '../providers/temperature/temperature';
 import { AuthProvider } from '../providers/auth/auth';
+import { DistanceProvider } from '../providers/distance/distance';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { AuthProvider } from '../providers/auth/auth';
     LoginPage,
     RegisterPage,
     PerfilPage,
-    AddressMapPage
+    AddressMapPage,
+    ConfigPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { AuthProvider } from '../providers/auth/auth';
     LoginPage,
     RegisterPage,
     PerfilPage,
-    AddressMapPage
+    AddressMapPage,
+    ConfigPage
   ],
   providers: [
     StatusBar,
@@ -50,7 +54,8 @@ import { AuthProvider } from '../providers/auth/auth';
     AuthProvider,
     Geolocation,
     GoogleMaps,
-    NativeGeocoder
+    NativeGeocoder,
+    DistanceProvider
   ]
 })
 export class AppModule {}

@@ -3,19 +3,22 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import {GoogleMaps, GoogleMap, GoogleMapOptions, GoogleMapsEvent} from '@ionic-native/google-maps';
 import {Geolocation} from '@ionic-native/geolocation';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { AuthProvider } from '../../providers/auth/auth';
+import { Globals } from '../../app/globals';
 
 @IonicPage()
 @Component({
   selector: 'page-address-map',
   templateUrl: 'address-map.html',
-  providers: []
+  providers: [Globals]
 })
 export class AddressMapPage implements OnInit{
 
 	map: GoogleMap;
-  address: Object;
-	constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private geocoder: NativeGeocoder, public viewCtrl: ViewController){
-
+  address: any;
+  coordenadas:any;
+	constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private geocoder: NativeGeocoder, public viewCtrl: ViewController, private auth: AuthProvider){
+    this.coordenadas = {lat:null, lng:null};
 	}
 
 	ngOnInit(){
@@ -24,6 +27,8 @@ export class AddressMapPage implements OnInit{
 
 	loadMap(){
     this.geolocation.getCurrentPosition().then((resp) => {
+      this.coordenadas.lat = resp.coords.latitude;
+      this.coordenadas.lng = resp.coords.longitude;
      let mapOptions: GoogleMapOptions = {
          camera: {
            target: {
@@ -60,6 +65,8 @@ export class AddressMapPage implements OnInit{
                  alert(JSON.stringify(error));
                });
              this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe(coords => {
+               this.coordenadas.lat = coords[0].lat;
+               this.coordenadas.lng = coords[0].lng;
                marker.setPosition(coords[0]);
                //alert(JSON.stringify(coords[0]));
                this.geocoder.reverseGeocode(coords[0].lat, coords[0].lng).then(addr => {
@@ -82,6 +89,10 @@ export class AddressMapPage implements OnInit{
   
 }
 dismiss(){
+  Globals.user.lat = this.coordenadas.lat;
+  Globals.user.lng = this.coordenadas.lng;
+  Globals.user.endereco = this.address.thoroughfare+', '+this.address.subThoroughfare+'\n'+this.address.subLocality+', '+this.address.locality+', '+this.address.administrativeArea+'\n'+this.address.countryName+'\n'+this.address.postalCode;
+  this.auth.updateUser(Globals.user);
   this.viewCtrl.dismiss(this.address);
 }
 }

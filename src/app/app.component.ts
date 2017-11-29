@@ -69,7 +69,11 @@ export class MyApp {
     if(Globals.user){
       watch.subscribe((data) => {
         this.distancia  = this.distance.haversine(data.coords.latitude, data.coords.longitude, Globals.user.lat, Globals.user.lng);
+        if(this.distancia <= Globals.user.dist && !Globals.user.status){
+          alert("Ligar?");
+        }
         console.log("Latitude: " + data.coords.latitude, "Longitude: " + data.coords.longitude);
+        console.log("UserLatitude: " + Globals.user.lat, "UserLongitude: " + Globals.user.lng);
         console.log(this.distancia + " km");
       },
       (error) => {

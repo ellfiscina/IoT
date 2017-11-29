@@ -8,4 +8,5 @@ export class User{
 	endereco: string;
 	lat: number;
 	lng: number;
+	dist: number;
 }

@@ -22,6 +22,7 @@ export class HomePage implements OnInit{
 	ngOnInit() {
   		this.read();
       console.log(Globals.default); 
+      console.log(Globals.user);
   	}
 
     /*isso aqui é pra ler o que tá no arquivo e substituir o numero que vai sofrer modificação*/

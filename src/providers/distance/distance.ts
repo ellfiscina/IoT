@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { Globals } from '../../app/globals';
 /*
   Generated class for the DistanceProvider provider.
 
@@ -28,5 +28,17 @@ export class DistanceProvider {
   	let c = 2 * Math.asin(Math.sqrt(a));
 
   	return R * c;
+  }
+
+  public salvar(value, email):Promise<any>{
+    return this.http.get(Globals.apiUrl+"setDistance.php?temperature="+value+"&email="+email).toPromise().then(
+        data => {
+          Globals.user.dist = value;
+          localStorage.setItem("user", JSON.stringify(Globals.user));
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

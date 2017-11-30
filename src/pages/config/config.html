@@ -15,5 +15,19 @@
 
 
 <ion-content padding>
-
+	<form (ngSubmit)="saveDist()" #registerForm="ngForm">
+		<ion-list no-lines>
+			<ion-item>
+				<ion-label>Ativar localização</ion-label>
+				<ion-toggle color="secondary" checked="false"></ion-toggle>
+			</ion-item>
+			<ion-item>
+				<span item-start>Distância:</span>
+				<ion-input type="text" name="dist" [(ngModel)]="dist"></ion-input>
+				<span item-end>km</span>
+			</ion-item>
+			<br>
+			<button ion-button round full class="btn" type="submit">Aceitar</button>
+		</ion-list>
+	</form>
 </ion-content>

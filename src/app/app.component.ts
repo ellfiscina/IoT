@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -13,6 +13,7 @@ import { Globals } from './globals';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { DistanceProvider } from '../providers/distance/distance';
+import { TemperatureProvider } from '../providers/temperature/temperature';
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
@@ -23,9 +24,9 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage = HomePage;
-  distancia: number;
-
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private auth: AuthProvider, public geolocation: Geolocation, private distance: DistanceProvider) {
+  distancia;
+  conf = true;
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private auth: AuthProvider, public geolocation: Geolocation, private distance: DistanceProvider, public alertCtrl: AlertController, private temp: TemperatureProvider) {
     this.initializeApp();
     Globals.user = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):false;
   }
@@ -69,12 +70,17 @@ export class MyApp {
     if(Globals.user){
       watch.subscribe((data) => {
         this.distancia  = this.distance.haversine(data.coords.latitude, data.coords.longitude, Globals.user.lat, Globals.user.lng);
-        if(this.distancia <= Globals.user.dist && !Globals.user.status){
-          alert("Ligar?");
+        if((this.distancia <= Globals.user.dist) && !Globals.user.status && this.conf){
+          if(!Globals.automatic){
+            this.showConfirm();
+          }
+          else{
+            this.saveData();
+          }
         }
         console.log("Latitude: " + data.coords.latitude, "Longitude: " + data.coords.longitude);
         console.log("UserLatitude: " + Globals.user.lat, "UserLongitude: " + Globals.user.lng);
-        console.log(this.distancia + " km");
+        console.log("dist: " + this.distancia + " km");
       },
       (error) => {
         console.log("Error: " + error.code, "Message: " + error.message);
@@ -82,4 +88,31 @@ export class MyApp {
     }
   }
 
+  showConfirm() {
+      let confirm = this.alertCtrl.create({
+        title: 'Ligar o ar condicionado?',
+        message: 'Temperatura atual: ' + Globals.user.temperature + 'º',
+        buttons: [
+          {
+            text: 'Não',
+            handler: () => {
+              console.log('Disagree clicked');
+              this.conf = false;
+            }
+          },
+          {
+            text: 'Sim',
+            handler: () => {
+              this.saveData();
+              console.log('Agree clicked');
+            }
+          }
+        ]
+      });
+      confirm.present();
+    }
+
+   saveData(){
+     this.temp.salvar(Globals.user.temperature, Globals.user.email);
+   }
 }

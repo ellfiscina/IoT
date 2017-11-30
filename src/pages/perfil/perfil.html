@@ -33,8 +33,8 @@
       </ion-item>
       <ion-item>
       	<ion-label>Endereço:</ion-label>
-        <span ion-button item-right clear (click)="showMap()"> <ion-icon name="map"></ion-icon></span>
-        <ion-textarea name="endereco" [(ngModel)]="data.endereco" rows="5"></ion-textarea>
+        <span ion-button clear item-right><ion-icon name="create"  (click)="showMap()" ></ion-icon></span> 
+        <ion-textarea name="endereco" [(ngModel)]="data.endereco" rows="5" [disabled]="inactiveEnd"></ion-textarea>
       </ion-item>
      
       <ion-item *ngIf=!inactiveSenha>

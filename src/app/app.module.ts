@@ -20,6 +20,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { TemperatureProvider } from '../providers/temperature/temperature';
 import { AuthProvider } from '../providers/auth/auth';
 import { DistanceProvider } from '../providers/distance/distance';
+import { ToastProvider } from '../providers/toast/toast';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { DistanceProvider } from '../providers/distance/distance';
     Geolocation,
     GoogleMaps,
     NativeGeocoder,
-    DistanceProvider
+    DistanceProvider,
+    ToastProvider
   ]
 })
 export class AppModule {}

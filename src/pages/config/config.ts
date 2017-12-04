@@ -21,7 +21,8 @@ export class ConfigPage {
 	dist: number;
   automatic: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, private distance: DistanceProvider, private toast: ToastProvider) {
-    this.automatic = false;
+    this.automatic = Globals.automatic;
+    console.log("inicio " + this.automatic);
   }
 
   ionViewDidLoad() {
@@ -30,11 +31,14 @@ export class ConfigPage {
 
   saveDist(){
     this.distance.salvar(this.dist, Globals.user.email);
-    Globals.automatic = this.automatic;
     this.toast.presentToast('Alterações salvas');
   }
-  notify(){
+
+  change(){
     this.automatic;
+    Globals.automatic = this.automatic;
+    localStorage.setItem("automatic", JSON.stringify(Globals.automatic));
     console.log(this.automatic);
   }
+
 }

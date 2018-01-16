@@ -29,6 +29,7 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private auth: AuthProvider, public geolocation: Geolocation, private distance: DistanceProvider, public alertCtrl: AlertController, private temp: TemperatureProvider) {
     this.initializeApp();
     Globals.user = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):false;
+    Globals.automatic = JSON.parse(localStorage.getItem("automatic"));
   }
 
   initializeApp() {
@@ -70,13 +71,16 @@ export class MyApp {
     if(Globals.user){
       watch.subscribe((data) => {
         this.distancia  = this.distance.haversine(data.coords.latitude, data.coords.longitude, Globals.user.lat, Globals.user.lng);
-        if((this.distancia <= Globals.user.dist) && !Globals.user.status && this.conf){
-          if(!Globals.automatic){
+        if((this.distancia <= Globals.user.dist) && Globals.user.status == 0 && this.conf){
+          if(Globals.automatic){
             this.showConfirm();
           }
           else{
             this.saveData();
           }
+        }
+        else if(this.distancia > Globals.user.dist && !this.conf){
+          this.conf = true;
         }
         console.log("Latitude: " + data.coords.latitude, "Longitude: " + data.coords.longitude);
         console.log("UserLatitude: " + Globals.user.lat, "UserLongitude: " + Globals.user.lng);

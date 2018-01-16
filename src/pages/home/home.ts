@@ -23,6 +23,7 @@ export class HomePage implements OnInit{
   		this.read();
       console.log(Globals.default); 
       console.log(Globals.user);
+      console.log(Globals.automatic);
   	}
 
     /*isso aqui é pra ler o que tá no arquivo e substituir o numero que vai sofrer modificação*/

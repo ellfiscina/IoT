@@ -13,8 +13,9 @@ import { ConfigPage } from '../pages/config/config';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {GoogleMaps} from '@ionic-native/google-maps';
-import {Geolocation} from '@ionic-native/geolocation';
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 import { TemperatureProvider } from '../providers/temperature/temperature';
@@ -54,6 +55,7 @@ import { ToastProvider } from '../providers/toast/toast';
     TemperatureProvider,
     AuthProvider,
     Geolocation,
+    BackgroundGeolocation,
     GoogleMaps,
     NativeGeocoder,
     DistanceProvider,

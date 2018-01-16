@@ -35,8 +35,11 @@ export class ConfigPage {
     localStorage.setItem("automatic", JSON.stringify(this.automatic));
     this.toast.presentToast('Alterações salvas');
   }
+
   notify(){
     this.automatic;
+
     console.log(this.automatic);
   }
+
 }

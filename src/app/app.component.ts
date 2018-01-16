@@ -3,6 +3,7 @@ import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -20,17 +21,20 @@ import { TemperatureProvider } from '../providers/temperature/temperature';
   templateUrl: 'app.html',
   providers: [Globals],
 })
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage = HomePage;
   distancia;
   conf = true;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private auth: AuthProvider, public geolocation: Geolocation, private distance: DistanceProvider, public alertCtrl: AlertController, private temp: TemperatureProvider) {
+
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private auth: AuthProvider, public geolocation: Geolocation, private distance: DistanceProvider, public alertCtrl: AlertController, private temp: TemperatureProvider, private backgroundGeolocation: BackgroundGeolocation) {
     this.initializeApp();
     Globals.user = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):false;
     Globals.automatic = JSON.parse(localStorage.getItem("automatic"));
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -67,6 +71,22 @@ export class MyApp {
   }
 
   getPosition(){
+    if(this.platform.is('cordova')){
+      const config: BackgroundGeolocationConfig = {
+              desiredAccuracy: 10,
+              stationaryRadius: 20,
+              distanceFilter: 30,
+              debug: true, //  enable this hear sounds for background-geolocation life-cycle.
+              stopOnTerminate: false, // enable this to clear background location settings when the app terminates
+      };
+
+      this.backgroundGeolocation.configure(config).subscribe((location: BackgroundGeolocationResponse) => {
+        console.log("bg " + location);
+      });
+
+      this.backgroundGeolocation.start();
+    }
+
     let watch = this.geolocation.watchPosition();
     if(Globals.user){
       watch.subscribe((data) => {
@@ -77,6 +97,7 @@ export class MyApp {
           }
           else{
             this.saveData();
+            console.log("Ligado");
           }
         }
         else if(this.distancia > Globals.user.dist && !this.conf){
@@ -119,4 +140,6 @@ export class MyApp {
    saveData(){
      this.temp.salvar(Globals.user.temperature, Globals.user.email);
    }
+
+
 }

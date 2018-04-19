@@ -62,7 +62,7 @@ export class HomePage implements OnInit{
   desligar(){
     if(this.temp.desligar(Globals.user.email)){
       this.createSuccess = true;
-      this.showPopup("Temperatura ajustada", this.numero+"ºC");
+      this.showPopup("Aparelho desligado", this.numero+"ºC");
     }
    // this.temp.arduino(Globals.user.email);
   }

@@ -17,6 +17,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import { TemperatureProvider } from '../providers/temperature/temperature';
 import { AuthProvider } from '../providers/auth/auth';
@@ -59,7 +60,8 @@ import { ToastProvider } from '../providers/toast/toast';
     GoogleMaps,
     NativeGeocoder,
     DistanceProvider,
-    ToastProvider
+    ToastProvider,
+    LocalNotifications
   ]
 })
 export class AppModule {}

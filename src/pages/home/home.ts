@@ -11,20 +11,21 @@ import { TemperatureProvider } from '../../providers/temperature/temperature';
   providers: [Globals],
 })
 export class HomePage implements OnInit{
-	private numero: number;
+  private numero: number;
   createSuccess = false;
   status = "off";
 
-  constructor(public navCtrl: NavController, private temp: TemperatureProvider, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private temp: TemperatureProvider, 
+    private alertCtrl: AlertController) {
     Globals.user = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):false;
   }
 
-	ngOnInit() {
-  		this.read();
+  ngOnInit() {
+      this.read();
       console.log(Globals.default); 
       console.log(Globals.user);
       console.log(Globals.automatic);
-  	}
+    }
 
     /*isso aqui é pra ler o que tá no arquivo e substituir o numero que vai sofrer modificação*/
     read(){
@@ -36,16 +37,16 @@ export class HomePage implements OnInit{
       }
     }
 
-  	limpar(){
-  		this.numero = 15;
-  	}
+    limpar(){
+      this.numero = 15;
+    }
 
   calcular(operacao: string): void{
-  	this.numero = this.temp.calcular(this.numero, operacao);
+    this.numero = this.temp.calcular(this.numero, operacao);
   }
 
   get display(): number {
-  	return this.numero;
+    return this.numero;
   }
 
   saveData(){
@@ -62,7 +63,7 @@ export class HomePage implements OnInit{
   desligar(){
     if(this.temp.desligar(Globals.user.email)){
       this.createSuccess = true;
-      this.showPopup("Aparelho desligado", this.numero+"ºC");
+      this.showPopup("Temperatura ajustada", this.numero+"ºC");
     }
    // this.temp.arduino(Globals.user.email);
   }

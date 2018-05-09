@@ -3,7 +3,6 @@ import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
-import { LocalNotifications } from '@ionic-native/local-notifications';
 import { BackgroundGeolocation, BackgroundGeolocationConfig, 
   BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
 
@@ -30,39 +29,23 @@ export class MyApp {
   rootPage = HomePage;
   distancia;
   conf = true;
-  flag: boolean;
 
   constructor(public platform: Platform, public statusBar: StatusBar, 
-      public splashScreen: SplashScreen, private auth: AuthProvider, 
-      public geolocation: Geolocation, private distance: DistanceProvider, 
-      public alertCtrl: AlertController, private temp: TemperatureProvider, 
-      private backgroundGeolocation: BackgroundGeolocation, 
-      private localNotifications: LocalNotifications){
-    
+    public splashScreen: SplashScreen, private auth: AuthProvider, 
+    public geolocation: Geolocation, private distance: DistanceProvider, 
+    public alertCtrl: AlertController, private temp: TemperatureProvider, 
+    private backgroundGeolocation: BackgroundGeolocation) {
     this.initializeApp();
-    Globals.user = localStorage.getItem("user")?
-      JSON.parse(localStorage.getItem("user")):false;
+    Globals.user = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):false;
     Globals.automatic = JSON.parse(localStorage.getItem("automatic"));
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-     // this.giveAlert();
       this.getPosition();
-    });
-  }
-
-  giveAlert(message){
-    this.localNotifications.schedule({
-      title: message,
-      trigger:{
-        type: 'location',
-        center: [Globals.user.lat, Globals.user.lng],
-        radius: this.distancia,
-        notifyOnEntry: true
-      }
     });
   }
 
@@ -102,10 +85,10 @@ export class MyApp {
               stopOnTerminate: false, // enable this to clear background location settings when the app terminates
       };
 
-      this.backgroundGeolocation.configure(config)
-        .subscribe((location: BackgroundGeolocationResponse) => {
-          console.log("bg " + location);
-        });
+      this.backgroundGeolocation.configure(config).subscribe(
+        (location: BackgroundGeolocationResponse) => {
+        console.log("bg " + location);
+      });
 
       this.backgroundGeolocation.start();
     }
@@ -116,27 +99,20 @@ export class MyApp {
         this.distancia  = this.distance.haversine(
           data.coords.latitude, data.coords.longitude, 
           Globals.user.lat, Globals.user.lng);
-        
-        if((this.distancia <= Globals.user.dist) 
-          && Globals.user.status == 0 && this.conf){
-          
+        if((this.distancia <= Globals.user.dist) && Globals.user.status == 0 && this.conf){
           if(Globals.automatic){
             this.showConfirm();
-            this.giveAlert("Ligar?");
           }
           else{
             this.saveData();
-            this.giveAlert("Ar condicionado ligado");
             console.log("Ligado");
           }
         }
         else if(this.distancia > Globals.user.dist && !this.conf){
           this.conf = true;
         }
-        console.log("Latitude: " + data.coords.latitude, 
-          "Longitude: " + data.coords.longitude);
-        console.log("UserLatitude: " + Globals.user.lat, 
-          "UserLongitude: " + Globals.user.lng);
+        console.log("Latitude: " + data.coords.latitude, "Longitude: " + data.coords.longitude);
+        console.log("UserLatitude: " + Globals.user.lat, "UserLongitude: " + Globals.user.lng);
         console.log("dist: " + this.distancia + " km");
       },
       (error) => {
@@ -172,4 +148,6 @@ export class MyApp {
    saveData(){
      this.temp.salvar(Globals.user.temperature, Globals.user.email);
    }
+
+
 }

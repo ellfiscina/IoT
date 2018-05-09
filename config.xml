@@ -100,8 +100,4 @@
         <variable name="ACCOUNT_TYPE" value="$PACKAGE_NAME.account" />
         <variable name="CONTENT_AUTHORITY" value="$PACKAGE_NAME" />
     </plugin>
-    <plugin name="phonegap-plugin-push" spec="^2.1.3">
-        <variable name="FCM_VERSION" value="11.6.2" />
-    </plugin>
-    <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
 </widget>

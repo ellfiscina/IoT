@@ -21,8 +21,8 @@ export class ConfigPage {
 	dist: number;
   automatic: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, private distance: DistanceProvider, private toast: ToastProvider) {
-    this.automatic = Globals.automatic;
-    this.dist = Globals.user.dist;
+    /*this.automatic = Globals.automatic;
+    this.dist = Globals.user.dist;*/
   }
 
   ionViewDidLoad() {

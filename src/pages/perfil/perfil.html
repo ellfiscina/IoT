@@ -15,10 +15,10 @@
 
 
 <ion-content padding *ngIf="show">
-	<div id="profile_picDiv">
+	<!--div id="profile_picDiv">
     	<img  id="profile_pic" src="../../assets/imgs/logo.png">
     	<ion-icon name="create"></ion-icon>
-	</div>
+	</div-->
 	<form (ngSubmit)="updateUser()" #registerForm="ngForm">
     <ion-list>
       <ion-item>
@@ -36,8 +36,17 @@
         <span ion-button clear item-right><ion-icon name="create"  (click)="showMap()" ></ion-icon></span> 
         <ion-textarea name="endereco" [(ngModel)]="data.endereco" rows="5" [disabled]="inactiveEnd"></ion-textarea>
       </ion-item>
-     
-      <ion-item *ngIf=!inactiveSenha>
+      <ion-item>
+        <span item-start>Distância:</span>
+        <ion-input type="text" name="dist" [(ngModel)]="data.dist"></ion-input>
+        <span item-end>km</span>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label>Perguntar antes de ligar</ion-label>
+        <ion-toggle [(ngModel)]="automatic" (ionChange)="notify()" color="secondary" [ngModelOptions]="{standalone: true}"></ion-toggle>
+      </ion-item>
+      <!--ion-item *ngIf=!inactiveSenha>
       	<ion-label>Nova senha:</ion-label>
         <ion-input type="password" name="password"></ion-input>
       </ion-item>
@@ -45,10 +54,10 @@
       	<ion-label>Confirmar senha:</ion-label>
         <ion-input type="password" name="password"></ion-input>
       </ion-item>
-      	<ion-label *ngIf="inactiveSenha" (click)="edit('senha')" id="senha">Mudar a senha</ion-label>
+      	<ion-label *ngIf="inactiveSenha" (click)="edit('senha')" id="senha">Mudar a senha</ion-label-->
     </ion-list>
-  <button ion-button color="secondary" class="btn" type="submit">Confirmar</button>
   </form>
 </ion-content>
 <ion-footer>
+  <button ion-button color="secondary" class="btn" (click)="updateUser()">Confirmar</button>
 </ion-footer>

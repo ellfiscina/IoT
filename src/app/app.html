@@ -1,10 +1,10 @@
 <ion-menu [content]="content">
   <ion-header id="oi">
     <ion-list  no-lines>
-      <br>
+      <!--br>
       <div *ngIf="user" id="profile_picDiv">
         <img  id="profile_pic" src="../assets/imgs/user.png">
-      </div>
+      </div-->
       <button *ngIf="user ; else elseBlock" class="white btnMenu perfil" menuClose ion-item  (click)="openPerfil()">
         {{user.nome}}
       </button>
@@ -12,14 +12,15 @@
   </ion-header>
 
   <ion-content id="menu">
+    <br>
     <ion-list  no-lines>
       <button class="white btnMenu" menuClose ion-item  (click)="openHome()">
         <ion-icon name="home" item-start></ion-icon>
         Home
       </button>
-      <button class="white btnMenu" menuClose ion-item  (click)="openConfig()">
-        <ion-icon name="settings" item-start></ion-icon>
-        Configurações
+      <button class="white btnMenu" menuClose ion-item  (click)="openPerfil()">
+        <ion-icon name="person" item-start></ion-icon>
+        Perfil
       </button>
 
       <ng-template  #elseBlock>

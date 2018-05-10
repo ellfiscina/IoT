@@ -25,7 +25,7 @@ import { TemperatureProvider } from '../providers/temperature/temperature';
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  createSuccess = false;
   rootPage = HomePage;
   distancia;
   conf = true;
@@ -104,7 +104,9 @@ export class MyApp {
             this.showConfirm();
           }
           else{
+            this.createSuccess = true;
             this.saveData();
+            this.showPopup("Temperatura ajustada", Globals.user.temperature+"ºC");
             console.log("Ligado");
           }
         }
@@ -149,5 +151,19 @@ export class MyApp {
      this.temp.salvar(Globals.user.temperature, Globals.user.email);
    }
 
-
+   showPopup(title, text){
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+      {
+        text: 'OK',
+        handler: () => {
+              console.log('Agree clicked');
+            }
+      }
+      ]
+    });
+    alert.present();
+  }
 }

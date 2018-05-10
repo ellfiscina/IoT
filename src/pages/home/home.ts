@@ -21,13 +21,11 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit() {
-      this.read();
-      console.log(Globals.default); 
       console.log(Globals.user);
-      console.log(Globals.automatic);
+      this.read();
     }
 
-    /*isso aqui é pra ler o que tá no arquivo e substituir o numero que vai sofrer modificação*/
+    /*read archive and substitute the temperature number*/
     read(){
       if(Globals.user){
         this.numero = Globals.user.temperature;
@@ -63,7 +61,7 @@ export class HomePage implements OnInit{
   desligar(){
     if(this.temp.desligar(Globals.user.email)){
       this.createSuccess = true;
-      this.showPopup("Temperatura ajustada", this.numero+"ºC");
+      this.showPopup("Aparelho desligado", " ");
     }
    // this.temp.arduino(Globals.user.email);
   }

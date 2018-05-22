@@ -20,20 +20,29 @@ import { Globals } from '../../app/globals';
 export class ConfigPage {
 	dist: number;
   automatic: boolean;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private distance: DistanceProvider, private toast: ToastProvider) {
-    /*this.automatic = Globals.automatic;
-    this.dist = Globals.user.dist;*/
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    private distance: DistanceProvider, private toast: ToastProvider) {
+    this.automatic = Globals.automatic;
+    this.dist = Globals.user.dist;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConfigPage');
   }
 
+  get user(){
+    return Globals.user;
+  }
+  
   saveDist(){
     this.distance.salvar(this.dist, Globals.user.email);
+    this.saveStorage();
+    this.toast.presentToast('Alterações salvas');
+  }
+
+  saveStorage(){
     Globals.automatic = this.automatic;
     localStorage.setItem("automatic", JSON.stringify(this.automatic));
-    this.toast.presentToast('Alterações salvas');
   }
 
   notify(){

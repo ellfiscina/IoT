@@ -13,15 +13,25 @@
 		<ion-grid>
 			<ion-row>
 				<ion-col>
-					<button ion-button color="primary" class="btnHome" id="menos" (click)="calcular('-')"><ion-icon name="remove"></ion-icon></button>
+					<button ion-button color="primary" class="btnHome" id="menos" (click)="calcular('-')">
+						<ion-icon name="remove"></ion-icon>
+					</button>
 				</ion-col>
-				<ion-col col-3><ion-input type="number" id="display" name="display" [value]="display" readonly></ion-input></ion-col>
+				<ion-col col-3>
+					<ion-input type="number" id="display" name="display" [value]="display" readonly></ion-input>
+				</ion-col>
 				<ion-col>
-					<button ion-button color="primary" class="btnHome" id="mais" (click)="calcular('+')"><ion-icon name="add"></ion-icon></button>
+					<button ion-button color="primary" class="btnHome" id="mais" (click)="calcular('+')">
+						<ion-icon name="add"></ion-icon>
+					</button>
 				</ion-col>
 			</ion-row>
 		</ion-grid>
-		<button ion-button color="primary" class="btnOK" (click)="saveData()" [disabled]="user">Ligar</button>
-		<button ion-button color="danger" class="btnOK" [disabled]="user" (click)="desligar()">Desligar</button>
+		<button ion-button color="primary" class="btnOK" (click)="saveData()" [disabled]="user">
+			Ligar
+		</button>
+		<button ion-button color="danger" class="btnOK" [disabled]="user" (click)="desligar()">
+			Desligar
+		</button>
 	</form>
 </ion-content>

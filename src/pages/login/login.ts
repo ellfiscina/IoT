@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController, Loading, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, 
+         LoadingController, Loading, MenuController } from 'ionic-angular';
 
 import { RegisterPage } from '../register/register';
 import { MyApp } from '../../app/app.component';
@@ -23,7 +24,10 @@ export class LoginPage {
   loading: Loading;
   registerCredentials = {email: '', password: ''};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, private auth: AuthProvider, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public view: ViewController, private auth: AuthProvider, 
+    private alertCtrl: AlertController, private loadingCtrl: LoadingController, 
+    public menu: MenuController) {
   }
 
   ionViewDidLoad() {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import {GoogleMaps, GoogleMap, GoogleMapOptions, GoogleMapsEvent} from '@ionic-native/google-maps';
+import { IonicPage, NavController, 
+         NavParams, ViewController } from 'ionic-angular';
+import {GoogleMaps, GoogleMap, GoogleMapOptions, 
+        GoogleMapsEvent} from '@ionic-native/google-maps';
 import {Geolocation} from '@ionic-native/geolocation';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { AuthProvider } from '../../providers/auth/auth';
@@ -17,7 +19,9 @@ export class AddressMapPage implements OnInit{
 	map: GoogleMap;
   address: any;
   coordenadas:any;
-	constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private geocoder: NativeGeocoder, public viewCtrl: ViewController, private auth: AuthProvider){
+	constructor(public navCtrl: NavController, public navParams: NavParams, 
+    private geolocation: Geolocation, private geocoder: NativeGeocoder, 
+    public viewCtrl: ViewController, private auth: AuthProvider){
     this.coordenadas = {lat:null, lng:null};
 	}
 
@@ -56,9 +60,13 @@ export class AddressMapPage implements OnInit{
                }
              })
            .then(marker => {
-             this.geocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude).then(addr => {
+             this.geocoder.reverseGeocode(resp.coords.latitude, 
+               resp.coords.longitude).then(addr => {
                  this.address = addr;
-                 marker.setSnippet(addr.thoroughfare+', '+addr.subThoroughfare+'\n'+addr.subLocality+', '+addr.locality+', '+addr.administrativeArea+'\n'+addr.countryName+'\n'+addr.postalCode);
+                 marker.setSnippet(addr.thoroughfare+', '+addr.subThoroughfare+
+                   '\n'+addr.subLocality+', '+addr.locality+', '+
+                   addr.administrativeArea+'\n'+addr.countryName+'\n'+
+                   addr.postalCode);
                  marker.showInfoWindow();
                },
                error => {
@@ -69,9 +77,13 @@ export class AddressMapPage implements OnInit{
                this.coordenadas.lng = coords[0].lng;
                marker.setPosition(coords[0]);
                //alert(JSON.stringify(coords[0]));
-               this.geocoder.reverseGeocode(coords[0].lat, coords[0].lng).then(addr => {
+               this.geocoder.reverseGeocode(coords[0].lat, coords[0].lng).then(
+                 addr => {
                  this.address = addr;
-                 marker.setSnippet(addr.thoroughfare+', '+addr.subThoroughfare+'\n'+addr.subLocality+', '+addr.locality+', '+addr.administrativeArea+'\n'+addr.countryName+'\n'+addr.postalCode);
+                 marker.setSnippet(addr.thoroughfare+', '+addr.subThoroughfare+
+                   '\n'+addr.subLocality+', '+addr.locality+', '+
+                   addr.administrativeArea+'\n'+addr.countryName+'\n'+
+                   addr.postalCode);
                  marker.showInfoWindow();
                },
                error => {
@@ -91,7 +103,10 @@ export class AddressMapPage implements OnInit{
 dismiss(){
   Globals.user.lat = this.coordenadas.lat;
   Globals.user.lng = this.coordenadas.lng;
-  Globals.user.endereco = this.address.thoroughfare+', '+this.address.subThoroughfare+'\n'+this.address.subLocality+', '+this.address.locality+', '+this.address.administrativeArea+'\n'+this.address.countryName+'\n'+this.address.postalCode;
+  Globals.user.endereco = this.address.thoroughfare+', '+
+  this.address.subThoroughfare+'\n'+this.address.subLocality+', '+
+  this.address.locality+', '+this.address.administrativeArea+'\n'+
+  this.address.countryName+'\n'+this.address.postalCode;
   this.auth.updateUser(Globals.user);
   this.viewCtrl.dismiss(this.address);
 }

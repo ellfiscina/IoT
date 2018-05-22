@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, 
+         ViewController, MenuController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { ToastProvider } from '../../providers/toast/toast'
 import { LoginPage } from '../login/login';
@@ -19,7 +20,9 @@ export class RegisterPage {
 
 	registerCredentials = {email: '', password: ''};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, private auth: AuthProvider, public menu: MenuController, private toast: ToastProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public view: ViewController, private auth: AuthProvider, 
+    public menu: MenuController, private toast: ToastProvider) {
 
   }
 

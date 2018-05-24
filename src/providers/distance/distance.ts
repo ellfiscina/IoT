@@ -31,11 +31,13 @@ export class DistanceProvider {
   }
 
   public salvar(value, email):Promise<any>{
-    return this.http.get(Globals.apiUrl+"setDistance.php?temperature="+value+"&email="+email).toPromise().then(
+    return this.http.get(Globals.apiUrl+"setDistance.php?dist="+value+"&email="+email).toPromise().then(
         data => {
           Globals.user.dist = value;
           localStorage.setItem("user", JSON.stringify(Globals.user));
+          console.log("OI");
           console.log(data);
+          console.log(email + " " + value);
         },
         error => {
           console.log(error);

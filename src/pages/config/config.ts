@@ -30,24 +30,19 @@ export class ConfigPage {
     console.log('ionViewDidLoad ConfigPage');
   }
 
-  get user(){
+/*  get user(){
     return Globals.user;
-  }
+  }*/
   
   saveDist(){
     this.distance.salvar(this.dist, Globals.user.email);
-    this.saveStorage();
-    this.toast.presentToast('Alterações salvas');
-  }
-
-  saveStorage(){
     Globals.automatic = this.automatic;
     localStorage.setItem("automatic", JSON.stringify(this.automatic));
+    this.toast.presentToast('Alterações salvas');
   }
 
   notify(){
     this.automatic;
-
     console.log(this.automatic);
   }
 
